@@ -16,7 +16,7 @@
 
 <body>
 <h1>학생 리스트</h1>
-<p><a href="/student/register" >학생(등록)</a></p>
+<p><a href="/student/register.do" >학생(등록)</a></p>
 <table>
   <thead>
   <tr>
@@ -35,7 +35,12 @@
       <td>${students.name}</td>
       <td>${students.gender}</td>
       <td>${students.age}</td>
-      <td><a href="">조희</a></td>
+      <td>
+        <c:url var="view_link" value="/student/view.do" scope="request">
+          <c:param name="id" value="${students.id}" />
+        </c:url>
+        <a href="${view_link}">조회</a>
+      </td>
     </tr>
   </c:forEach>
   </tbody>

@@ -35,8 +35,8 @@
       <td>${student.age}</td>
     </tr>
     <tr>
-      <th>등록일</th>
-      <td><fmt:formatDate value="${student.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+<%--      <th>등록일</th>--%>
+<%--      <td><fmt:formatDate value="${student.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>--%>
     </tr>
   </tbody>
 </table>

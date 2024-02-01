@@ -1,12 +1,14 @@
 package com.nhnacademy.studentmanagement.repository;
 
 import com.nhnacademy.studentmanagement.Student;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 public class MapStudentRepository implements StudentRepository {
     private Map<String, Student> studentMap = new ConcurrentHashMap<>();
 
@@ -27,6 +29,7 @@ public class MapStudentRepository implements StudentRepository {
 
     @Override
     public Student getStudentById(String id) {
+        log.debug("comecome");
         return studentMap.get(id);
     }
 

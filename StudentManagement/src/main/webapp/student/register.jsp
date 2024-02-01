@@ -23,7 +23,7 @@
         action = /student/update
 -->
 
-<form method="post" action="${action}">
+<form method="post" ${empty student ? 'action ="/student/register.do"' : 'action="/student/update.do"'}>
     <table>
         <tbody>
         <tr>
@@ -32,7 +32,7 @@
         </tr>
         <!-- todo input 구현 -->
             <th>이름</th>
-            <td><input type="text" name="studentName" value="${student.name}"></td>
+            <td><input type="text" name="name" value="${student.name}"></td>
         </tr>
         <tr>
             <th>성별</th>
@@ -43,7 +43,7 @@
         </tr>
         <tr>
             <th>나이</th>
-            <td><input type="text" name="studentAge" value="${student.age}"></td>
+            <td><input type="text" name="age" value="${student.age}"></td>
         </tr>
         </tbody>
     </table>

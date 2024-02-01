@@ -18,7 +18,7 @@ public class StudentUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String studentId = (String)req.getAttribute("id");
+        String studentId = req.getParameter("id");
         Student student = studentRepository.getStudentById(studentId);
         req.setAttribute("student", student);
 
@@ -28,10 +28,10 @@ public class StudentUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("studentId");
-        String name = req.getParameter("studentName");
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
         String gender = req.getParameter("gender");
-        String age = req.getParameter("studentAge");
+        String age = req.getParameter("age");
 
         if(Objects.isNull(id)) {
             resp.sendError(400, "id is needed");
@@ -56,7 +56,7 @@ public class StudentUpdateServlet extends HttpServlet {
         studentRepository.update(student);
 
         //todo /student/view?id=student1 <-- redirect
-        resp.sendRedirect("/student/view?id="+id);
+        resp.sendRedirect("/student/view.do?id="+id);
     }
 
     @Override

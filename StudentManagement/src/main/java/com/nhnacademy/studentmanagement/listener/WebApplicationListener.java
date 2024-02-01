@@ -8,8 +8,10 @@ import com.nhnacademy.studentmanagement.repository.StudentRepository;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import java.time.LocalDateTime;
 
+@WebListener
 public class WebApplicationListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {

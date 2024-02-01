@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "studentRegisterServlet", urlPatterns = "/student/register.do")
 public class StudentRegisterServlet extends HttpServlet {
@@ -33,22 +34,28 @@ public class StudentRegisterServlet extends HttpServlet {
         String gender = req.getParameter("gender");
         String age = req.getParameter("age");
 
-        if(id == null){
-            resp.sendError(400);
-        }
-        if(name == null){
-            resp.sendError(400);
-        }
-        if(gender == null){
-            resp.sendError(400);
-        }
-        if(age == null){
-            resp.sendError(400);
-        }
+//        if(Objects.isNull(id)) {
+//            resp.sendError(400, "id is needed");
+//        }
+//        if(Objects.isNull(name)) {
+//            resp.sendError(400, "student name is needed");
+//        }
+//        if(Objects.isNull(gender)) {
+//            resp.sendError(400, "student gender is needed");
+//        }
+//        if(Objects.isNull(req.getParameter("studentAge"))) {
+//            resp.sendError(400, "student age is needed");
+//        }
+//        int student_age = 0;
+//        try {
+//            student_age = Integer.parseInt(age);
+//        }catch (Exception e) {
+//            resp.sendError(400, "student age must be integer");
+//        }
 
         Student student = new Student(id, name, Gender.valueOf(gender), Integer.parseInt(age));
         studentRepository.save(student);
 
-        resp.sendRedirect("/student/view?id="+id);
+        resp.sendRedirect("/student/view.do?id="+id);
     }
 }

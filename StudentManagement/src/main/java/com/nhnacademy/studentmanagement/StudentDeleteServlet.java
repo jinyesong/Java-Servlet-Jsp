@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Slf4j
-@WebServlet(name = "studentDeleteServlet", urlPatterns = "/student/delete")
+@WebServlet(name = "studentDeleteServlet", urlPatterns = "/student/delete.do")
 public class StudentDeleteServlet extends HttpServlet {
 
     private StudentRepository studentRepository;
