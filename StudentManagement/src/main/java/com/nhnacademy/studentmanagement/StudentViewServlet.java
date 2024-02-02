@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Slf4j
-@WebServlet(name = "studentViewServlet", urlPatterns = "/student/view.do")
+@WebServlet(name = "studentViewServlet", urlPatterns = "/student/view")
 public class StudentViewServlet extends HttpServlet {
     private StudentRepository studentRepository;
 
