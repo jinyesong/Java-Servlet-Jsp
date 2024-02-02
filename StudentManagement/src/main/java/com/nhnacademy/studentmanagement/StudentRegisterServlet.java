@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet(name = "studentRegisterServlet", urlPatterns = "/student/register.do")
+@WebServlet(name = "studentRegisterServlet", urlPatterns = "/student/register")
 public class StudentRegisterServlet extends HttpServlet {
+
     private StudentRepository studentRepository;
 
     @Override
@@ -23,39 +24,39 @@ public class StudentRegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        /*
         RequestDispatcher rd = req.getRequestDispatcher("/student/register.jsp");
-        rd.forward(req, resp);
+        rd.forward(req,resp);
+        */
+        //todo view attribute 설정 - /student/register.jsp
+        req.setAttribute("view", "/student/register.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String id = req.getParameter("id");
         String name = req.getParameter("name");
-        String gender = req.getParameter("gender");
-        String age = req.getParameter("age");
 
-//        if(Objects.isNull(id)) {
-//            resp.sendError(400, "id is needed");
-//        }
-//        if(Objects.isNull(name)) {
-//            resp.sendError(400, "student name is needed");
-//        }
-//        if(Objects.isNull(gender)) {
-//            resp.sendError(400, "student gender is needed");
-//        }
-//        if(Objects.isNull(req.getParameter("studentAge"))) {
-//            resp.sendError(400, "student age is needed");
-//        }
-//        int student_age = 0;
-//        try {
-//            student_age = Integer.parseInt(age);
-//        }catch (Exception e) {
-//            resp.sendError(400, "student age must be integer");
-//        }
+        Gender gender = null;
+        if(Objects.nonNull(req.getParameter("gender"))){
+            gender = Gender.valueOf(req.getParameter("gender"));
+        }
 
-        Student student = new Student(id, name, Gender.valueOf(gender), Integer.parseInt(age));
+        Integer age = null;
+        if(Objects.nonNull(req.getParameter("age"))){
+            age = Integer.parseInt(req.getParameter("age"));
+        }
+
+        if(Objects.isNull(id) || Objects.isNull(name) || Objects.isNull(gender) || Objects.isNull(age)){
+            throw new RuntimeException("id,name,gender,age 확인해주세요!");
+        }
+
+        Student student = new Student(id,name,gender,age);
         studentRepository.save(student);
 
-        resp.sendRedirect("/student/view.do?id="+id);
+        //todo redirect view attribute 설정   resp.sendRedirect("/student/view?id="+student.getId());
+        req.setAttribute("view", "redirect:/student/view?id="+student.getId());
     }
+
 }
